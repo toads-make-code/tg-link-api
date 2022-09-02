@@ -114,14 +114,6 @@ def check_linking():
                     "debug": {}})
 
 
-@app.route(f'/api/{api_data["version"]["id"]}/link/remove')
-def remove_linking():
-    '''
-    Indev.
-    '''
-    pass
-
-
 @app.route(f'/api/{api_data["version"]["id"]}/link/send')
 def send():
     '''
@@ -131,8 +123,8 @@ def send():
 
     TO-DO: make some kind of verification
     '''
-    uid = request.args.get("uid")  # very very long string
-    data = request.args.get("data")  # content
+    uid = request.args.get("uid")
+    data = request.args.get("data")
     if uid is None or data is None:
         return jsonify({"code": 200, "content": {"error": {"title": "Input error",
                                                            "description": "UID and Data shouldn't be equal to None"}},
@@ -147,7 +139,7 @@ def get():
     '''
     Get data from data queue
     '''
-    uid = request.args.get("uid")  # very very long string
+    uid = request.args.get("uid")
     if uid is None:
         return jsonify({"code": 200, "content": {"error": {"title": "Input error",
                                                            "description": "UID shouldn't be equal to None"}},
