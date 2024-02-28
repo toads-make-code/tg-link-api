@@ -1,54 +1,51 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Панель управления</title>
         <style type="text/css" media="screen">
-            .required{
-                color: red;
-            }
+            .required{color: red;}
             #container{
-                background-color: cornflowerblue;
-                color: cornsilk;
+                font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+                background-color: darkslateblue;
                 position: absolute;
-                top: 25%; right: 25%; bottom: 25%; left: 25%;
+                font-size: 1em;
+                color: white;
+                left: 10vw; right: 10vw; top: 15vh;
                 padding: 25px;
             }
-            h1{
-                text-align: center;
-            }
-            p, label{
-                font-size: 24px;
-                padding: 0;
-                margin: 0;
-            }
+            h1{text-align: center;}
+            h1, p, label{padding: 0;margin: 0;}
         </style>
     </head>
     <body>
-            <div id="container">
-                <div style="margin: 5px; display: grid;grid-auto-flow: row;grid-row-gap: 10px">
-                    <h1>Настройки</h1>
-                    <p>ID розетки: uSocket-3-123456</p>
-                    <div>
-                        <label for="enableWiFi">Включить точку доступа для настройки</label>
-                        <input type="checkbox" id="enableWiFi" checked="true"/>
-                    </div>
-
-                    <label for="wifi-ssid" class="formbuilder-text-label">SSID<span class="required">*</span></label>
-                    <input type="text" class="form-control" name="wifi-ssid" access="false" id="wifi-ssid" title="Название точки доступа" required="required" aria-required="true">
-                    <label for="password" class="formbuilder-text-label">Пароль<span class="required">*</span></label>
-                    <input type="password" class="form-control" name="password" access="false" id="password" required="required" aria-required="true">
-
-                    <div>
-                        <label for="output-select" class="formbuilder-select-label">Вывод</label>
-                        <select class="form-control" name="output-select" id="output-select">
-                            <option value="socketA" selected="true" id="output-select-0">Розетка А</option>
-                            <option value="socketB" id="output-select-1">Розетка Б</option>
-                            <option value="socketC" id="output-select-2">Розетка В</option>
-                        </select>                
-                        <button type="button" class="btn-default btn" name="on" access="false" id="on">Включить</button>
-                        <button type="button" class="btn-default btn" name="off" access="false" id="off">Выключить</button>
-                    </div>
-                    <button type="submit" class="btn-primary btn" name="submit" style="margin-top: 20px;" id="submit">Применить</button>
-                </div>
-            </div> 
+        <div id="container">
+            <h1>Настройки</h1>
+            <p id="socketID">ID розетки: uSocket-3-123456</p>
+            <form action="disable-hotspot" style="margin: 5px; display: grid;grid-auto-flow: row;grid-row-gap: 7px">
+                <button type="submit" style="margin-top: 20px; width: fit-content;">Отключить конфигурационную точку доступа</button>
+            </form>
+            <form style="margin: 5px; display: grid;grid-auto-flow: row;grid-row-gap: 7px">
+                <label for="wifi-ssid">SSID<span class="required">*</span></label>
+                <input type="text" style="width: 50%;" name="wifi-ssid" access="false" id="wifi-ssid" title="Название точки доступа" required="required" aria-required="true">
+                <label for="password">Пароль<span class="required">*</span></label>
+                <input type="password" style="width: 50%;" name="password" access="false" id="password" required="required" aria-required="true">
+                <button type="submit" style="margin-top: 20px; width: fit-content;">Применить</button>
+            </form>
+            <form style="padding: 25px 0px 0px 5px" onsubmit="(e) => {e.preventDefault();}">
+                <label for="output-select">Вывод</label>
+                <select name="output-select" id="output-select" onchange="{this.form.submit();}">
+                    <option value="socketA" selected="true" id="output-select-0">Розетка А</option>
+                    <option value="socketB" id="output-select-1">Розетка Б</option>
+                    <option value="socketC" id="output-select-2">Розетка В</option>
+                </select>                
+                <input type="checkbox" id="enableSocket" name="socket" checked="false" value="enabled" onchange="{this.form.submit()}"/>
+            </form>      
+            <script type="text/javascript">
+                    const FACTORY_ID = "uSocket-3-1"
+                    document.getElementById('output-select').value = new URLSearchParams(window.location.search).get('output-select');
+                    document.getElementById('enableSocket').checked = new URLSearchParams(window.location.search).get('socket') == "enabled";
+                    document.getElementById('socketID').innerText = "ID розетки: " + (new URLSearchParams(window.location.search).get('custom-id') || FACTORY_ID);
+            </script>
+        </div>
     </body>
 </html>
