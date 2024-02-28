@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Панель управления</title>
+        <style type="text/css" media="screen">
+            .required{
+                color: red;
+            }
+            #container{
+                background-color: cornflowerblue;
+                color: cornsilk;
+                position: absolute;
+                top: 25%; right: 25%; bottom: 25%; left: 25%;
+                padding: 25px;
+            }
+            h1{
+                text-align: center;
+            }
+            p, label{
+                font-size: 24px;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+            <div id="container">
+                <div style="margin: 5px; display: grid;grid-auto-flow: row;grid-row-gap: 10px">
+                    <h1>Настройки</h1>
+                    <p>ID розетки: uSocket-3-123456</p>
+                    <div>
+                        <label for="enableWiFi">Включить точку доступа для настройки</label>
+                        <input type="checkbox" id="enableWiFi" checked="true"/>
+                    </div>
+
+                    <label for="wifi-ssid" class="formbuilder-text-label">SSID<span class="required">*</span></label>
+                    <input type="text" class="form-control" name="wifi-ssid" access="false" id="wifi-ssid" title="Название точки доступа" required="required" aria-required="true">
+                    <label for="password" class="formbuilder-text-label">Пароль<span class="required">*</span></label>
+                    <input type="password" class="form-control" name="password" access="false" id="password" required="required" aria-required="true">
+
+                    <div>
+                        <label for="output-select" class="formbuilder-select-label">Вывод</label>
+                        <select class="form-control" name="output-select" id="output-select">
+                            <option value="socketA" selected="true" id="output-select-0">Розетка А</option>
+                            <option value="socketB" id="output-select-1">Розетка Б</option>
+                            <option value="socketC" id="output-select-2">Розетка В</option>
+                        </select>                
+                        <button type="button" class="btn-default btn" name="on" access="false" id="on">Включить</button>
+                        <button type="button" class="btn-default btn" name="off" access="false" id="off">Выключить</button>
+                    </div>
+                    <button type="submit" class="btn-primary btn" name="submit" style="margin-top: 20px;" id="submit">Применить</button>
+                </div>
+            </div> 
+    </body>
+</html>

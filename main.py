@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import aiogram
 import datetime
 import json
 
@@ -19,6 +19,7 @@ def read_api_info():
 Get API data
 '''
 api_data = read_api_info()
+
 
 
 @app.route(f'/api/{api_data["version"]["id"]}/')
@@ -154,4 +155,5 @@ def get():
 
 
 if __name__ == '__main__':
+    asyncio.run(main())
     app.run()  # Let's goooo
